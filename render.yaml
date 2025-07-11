@@ -1,11 +1,13 @@
+
 services:
   - type: web
-    name: vokabeltrainer
+    name: vokabeltrainer-backend
     env: docker
     plan: free
-    dockerfilePath: ./docker/Dockerfile.backend
+    dockerfilePath: backend/Dockerfile
     buildCommand: ""
     startCommand: python main.py
+    autoDeploy: true
     envVars:
       - key: MYSQL_ROOT_PASSWORD
         value: root

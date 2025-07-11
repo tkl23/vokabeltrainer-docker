@@ -1,3 +1,6 @@
 flask
 requests
-...
+pymysql
+openpyxl
+flask-cors
+flask-jwt-extended
