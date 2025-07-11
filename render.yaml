@@ -7,4 +7,3 @@ services:
     dockerfilePath: backend/Dockerfile
     buildCommand: ""
     startCommand: python main.py
-    autoDeploy: true

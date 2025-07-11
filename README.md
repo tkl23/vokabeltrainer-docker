@@ -1,18 +1,14 @@
 
-# 📚 Vokabeltrainer Fullstack
+# 📥 Vokabeltrainer mit Excel-Upload und Fortschritt pro Liste
 
-Enthalten:
-- Flask Backend mit Login & Fortschritt
-- MySQL-Datenbankstruktur
-- Einfaches HTML-Frontend
-- Bereit für Render.com Hosting
+Funktionen:
+- Lehrer-Login
+- Excel-Upload mit Listenname (xlsx)
+- Fortschrittsanzeige je Liste (%)
+- Docker & Render.com ready
 
-## 🚀 Deployment
-
-1. MySQL in Render anlegen (Name: vokabeltrainer-db, User root/root)
-2. GitHub Repo mit diesem Projekt
-3. Web Service starten – Render erkennt `render.yaml`
-
-## 📊 Fortschritt:
-- Jeder Schüler muss jede Vokabel 5× richtig beantworten
-- Fortschritt wird pro Nutzer gespeichert
+## Deployment
+1. Repo pushen
+2. Render erkennt render.yaml
+3. MySQL-Instanz separat einrichten
+4. App live online nutzen

@@ -1,32 +1,54 @@
 
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Vokabeltrainer</title></head>
+<head><meta charset="UTF-8"><title>Upload & Fortschritt</title></head>
 <body>
     <h2>Login</h2>
     <input id="user" placeholder="Benutzer"><br>
     <input id="pass" placeholder="Passwort" type="password"><br>
-    <button onclick="login()">Login</button>
+    <button onclick="login()">Login</button><br><br>
+
+    <h2>Excel Upload</h2>
+    <input type="text" id="liste" placeholder="Listenname"><br>
+    <input type="file" id="file"><br>
+    <button onclick="upload()">Hochladen</button><br><br>
+
     <h2>Fortschritt</h2>
-    <button onclick="fort()">Lade Fortschritt</button>
-    <div id="result"></div>
+    <button onclick="lade()">Lade Listen</button>
+    <ul id="listen"></ul>
+
     <script>
         let token = "";
         function login() {
             fetch("/auth/login", {
                 method: "POST",
-                headers: {'Content-Type': 'application/json'},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({username: user.value, password: pass.value})
             }).then(r => r.json()).then(j => {
                 token = j.access_token;
                 alert("Eingeloggt!");
             });
         }
-        function fort() {
-            fetch("/fortschritt", {
+
+        function upload() {
+            const form = new FormData();
+            form.append("liste", liste.value);
+            form.append("file", file.files[0]);
+            fetch("/upload", {
+                method: "POST",
+                headers: {"Authorization": "Bearer " + token},
+                body: form
+            }).then(r => r.text()).then(alert);
+        }
+
+        function lade() {
+            fetch("/listen", {
                 headers: {"Authorization": "Bearer " + token}
-            }).then(r => r.json()).then(j => {
-                result.innerText = `Gelernt: ${j.gelernt} / ${j.gesamt} (${j.prozent}%)`;
+            }).then(r => r.json()).then(data => {
+                listen.innerHTML = "";
+                data.forEach(l => {
+                    listen.innerHTML += `<li>${l.name}: ${l.fortschritt}%</li>`;
+                });
             });
         }
     </script>
