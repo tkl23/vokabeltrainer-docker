@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: vokabeltrainer
+    env: docker
+    plan: free
