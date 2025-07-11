@@ -3,3 +3,9 @@ services:
     name: vokabeltrainer
     env: docker
     plan: free
+    dockerfilePath: ./docker/Dockerfile.backend
+    buildCommand: ""
+    startCommand: python main.py
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: root
