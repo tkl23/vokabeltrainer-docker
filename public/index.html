@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Vokabeltrainer</title></head>
+<body>
+    <h2>Login</h2>
+    <input id="user" placeholder="Benutzer"><br>
+    <input id="pass" placeholder="Passwort" type="password"><br>
+    <button onclick="login()">Login</button>
+    <h2>Fortschritt</h2>
+    <button onclick="fort()">Lade Fortschritt</button>
+    <div id="result"></div>
+    <script>
+        let token = "";
+        function login() {
+            fetch("/auth/login", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: user.value, password: pass.value})
+            }).then(r => r.json()).then(j => {
+                token = j.access_token;
+                alert("Eingeloggt!");
+            });
+        }
+        function fort() {
+            fetch("/fortschritt", {
+                headers: {"Authorization": "Bearer " + token}
+            }).then(r => r.json()).then(j => {
+                result.innerText = `Gelernt: ${j.gelernt} / ${j.gesamt} (${j.prozent}%)`;
+            });
+        }
+    </script>
+</body>
+</html>

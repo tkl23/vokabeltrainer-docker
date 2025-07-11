@@ -1,0 +1,10 @@
+
+services:
+  - type: web
+    name: vokabeltrainer-backend
+    env: docker
+    plan: free
+    dockerfilePath: backend/Dockerfile
+    buildCommand: ""
+    startCommand: python main.py
+    autoDeploy: true
